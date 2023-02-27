@@ -1,0 +1,48 @@
+<div class="container mt-5">
+    <div class="row">
+        <h1 class="text-center font-weight-bold mb-4">TODO LIST</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="input-group">
+                <input type="text" [(ngModel)]="tarea" (keyup.enter)="agregarTarea()" class="form-control form-control-lg text-center" placeholder="Ingrese tarea">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="agregarTarea()">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-lg-3">
+            <h4 class="font-weight-bold mb-3">To do</h4>
+            <div cdkDropList class="example-list" id="list-todo" [cdkDropListData]="todo" [cdkDropListConnectedTo]="['list-progress']" (cdkDropListDropped)="drop($event)">
+                <div class="example-box p-2 mb-2" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-3">
+            <h4 class="font-weight-bold mb-3">In Progress</h4>
+            <div cdkDropList class="example-list" id="list-progress" [cdkDropListData]="progress" [cdkDropListConnectedTo]="['list-todo', 'list-tested']" (cdkDropListDropped)="drop($event)">
+                <div class="example-box p-2 mb-2" *ngFor="let item of progress" cdkDrag>{{item}}</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <h4 class="font-weight-bold mb-3">To Be Tested</h4>
+            <div cdkDropList class="example-list" id="list-tested" [cdkDropListData]="tested" [cdkDropListConnectedTo]="['list-progress', 'list-done']" (cdkDropListDropped)="drop($event)">
+                <div class="example-box p-2 mb-2" *ngFor="let item of tested" cdkDrag>{{item}}</div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-3">
+            <h4 class="font-weight-bold mb-3">Done</h4>
+            <div cdkDropList class="example-list" id="list-done" [cdkDropListData]="done" [cdkDropListConnectedTo]="['list-tested']" (cdkDropListDropped)="drop($event)">
+                <div class="example-box p-2 mb-2" *ngFor="let item of done" cdkDrag>{{item}}</div>
+            </div>
+        </div>
+    </div>
+</div>
